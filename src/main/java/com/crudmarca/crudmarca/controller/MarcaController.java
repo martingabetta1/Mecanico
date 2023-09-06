@@ -27,18 +27,17 @@ public class MarcaController {
     @GetMapping("")
     public String home(Model model){
         model.addAttribute("Marcas", marcaRepository.findAll());
-        return "home";
+        return "marca/home";
     }
 
 
     @GetMapping("/create") // http://localhost:8080/marcas/create
     public String create(){
-        return "create";
+        return "marca/create";
     }
 
     @PostMapping("/save")
     public String save(@ModelAttribute Marca marca){
-        logger.info("Datos Marca, {}", marca);
         marcaRepository.save(marca);
         return "redirect:/marcas";
     }
@@ -48,7 +47,7 @@ public class MarcaController {
         Marca marca = marcaRepository.getReferenceById(id);
         logger.info("Marca Obtenida, {}", marca);
         model.addAttribute("marca", marca);
-        return "edit";
+        return "/marca/edit";
     }
 
     @GetMapping("/delete/{id}")

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tecnico CRUD</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+
+<body>
+    <h1>Lista de tecnicos</h1>
+
+    <a th:href="@{tecnicos/create}" class="btn btn-primary">Nuevo tecnico</a>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Fecha de creación</th>
+                    <th scope="col">Fecha Modificación</th>
+                    <th scope="col">Acción</th> 
+                    <th scope="col">Acción</th> 
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="tecnico:${Tecnicos}">
+                    <td scope="row" th:text="${tecnico.tecnico_id}"></td>
+                    <td th:text="${tecnico.tecnico_nombre}"></td>
+                    <td th:text="${tecnico.fechaCreacion}"></td>
+                    <td th:text="${tecnico.fechaModificacion}"></td>
+                    <td> <a th:href="@{/tecnicos/edit/{id} (id=${tecnico.tecnico_id}) }" class="btn btn-warning">Modificar</a></td>
+                    <td> <a th:href="@{/tecnicos/delete/{id}(id=${tecnico.tecnico_id})}" class="btn btn-danger">Eliminar</a></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+</body>
+
+</html>
