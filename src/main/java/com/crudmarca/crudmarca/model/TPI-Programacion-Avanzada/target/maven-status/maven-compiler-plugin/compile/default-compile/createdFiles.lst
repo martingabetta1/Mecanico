@@ -1,0 +1,5 @@
+com/crudmarca/crudmarca/CrudMarcaApplication.class
+com/crudmarca/crudmarca/model/Modelo.class
+com/crudmarca/crudmarca/controller/MarcaController.class
+com/crudmarca/crudmarca/repository/MarcaRepository.class
+com/crudmarca/crudmarca/model/Marca.class

@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  db_crudmara:
+    container_name: db_crudmara
+    image: postgres:15
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: con123
+      POSTGRES_USER: postgres
+      POSTGRES_DB: crudmarca
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata: {}
