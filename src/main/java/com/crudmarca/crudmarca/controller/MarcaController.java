@@ -1,7 +1,5 @@
 package com.crudmarca.crudmarca.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +16,6 @@ import com.crudmarca.crudmarca.repository.MarcaRepository;
 @RequestMapping("/marcas")  // http://localhost:8080/marcas
 public class MarcaController {
 
-    private final Logger logger = LoggerFactory.getLogger(Marca.class);
 
     @Autowired
     private MarcaRepository marcaRepository;
@@ -45,7 +42,6 @@ public class MarcaController {
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Integer id, Model model){
         Marca marca = marcaRepository.getReferenceById(id);
-        logger.info("Marca Obtenida, {}", marca);
         model.addAttribute("marca", marca);
         return "/marca/edit";
     }
@@ -53,7 +49,6 @@ public class MarcaController {
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Integer id){
         Marca marca = marcaRepository.getReferenceById(id);
-        logger.info("Marca Eliminada, {}", marca);
         marcaRepository.delete(marca);
         return "redirect:/marcas";
     }
