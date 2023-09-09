@@ -1,4 +1,4 @@
-package com.crudmarca.crudmarca.model;
+package com.crudmarca.model;
 
 import java.time.LocalDateTime;
 
@@ -34,11 +34,11 @@ public class Marca {
 
     @Column(name = "fecha_creacion", updatable= false)
     @CreationTimestamp
-    private LocalDateTime fechaCreacion;  
+    private LocalDateTime fecha_creacion;  
 
     @Column(name = "fecha_modificacion") 
     @UpdateTimestamp
-    private LocalDateTime fechaModificacion;
+    private LocalDateTime fecha_modificacion;
 
     public String getMarca_nombre() {
         return marca_nombre;
@@ -48,31 +48,15 @@ public class Marca {
         super();
     }
 
-    public Marca(String marca_nombre) {
-        this.marca_nombre = marca_nombre;
-        this.fechaCreacion = LocalDateTime.now();
-    }
-
 
     @Override
     public String toString() {
-        return "Marca [marca_id=" + marca_id + ", marca_nombre=" + marca_nombre + ", fechaCreacion=" + fechaCreacion
-                + ", fechaModificacion=" + fechaModificacion + "]";
+        return "Marca [marca_id=" + marca_id + ", marca_nombre=" + marca_nombre + ", fecha_creacion=" + fecha_creacion
+                + ", fecha_modificacion=" + fecha_modificacion + "]";
     }
 
     public Integer getMarca_id() {
         return marca_id;
-    }
-
-    public LocalDateTime getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public LocalDateTime getFechaModificacion() {
-        return fechaModificacion;
-    }
-    public void setFechaModificacion(LocalDateTime fechaModificacion) {
-        this.fechaModificacion = fechaModificacion;
     }
 
     public void setMarca_id(Integer marca_id) {
@@ -83,8 +67,20 @@ public class Marca {
         this.marca_nombre = marca_nombre;
     }
 
-    public void setFechaCreacion(LocalDateTime fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }    
+    public LocalDateTime getFecha_creacion() {
+        return fecha_creacion;
+    }
+
+    public void setFecha_creacion(LocalDateTime fecha_creacion) {
+        this.fecha_creacion = fecha_creacion;
+    }
+
+    public LocalDateTime getFecha_modificacion() {
+        return fecha_modificacion;
+    }
+
+    public void setFecha_modificacion(LocalDateTime fecha_modificacion) {
+        this.fecha_modificacion = fecha_modificacion;
+    }
 
 }

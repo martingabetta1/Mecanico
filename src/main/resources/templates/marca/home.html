@@ -30,8 +30,8 @@
                 <tr th:each="marca:${Marcas}">
                     <td scope="row" th:text="${marca.marca_id}"></td>
                     <td th:text="${marca.marca_nombre}"></td>
-                    <td th:text="${marca.fechaCreacion}"></td>
-                    <td th:text="${marca.fechaModificacion}"></td>
+                    <td th:text="${marca.fecha_creacion}"></td>
+                    <td th:text="${marca.fecha_modificacion}"></td>
                     <td> <a th:href="@{/marcas/edit/{id} (id=${marca.marca_id}) }" class="btn btn-warning">Modificar</a></td>
                     <td> <a th:href="@{/marcas/delete/{id}(id=${marca.marca_id})}" class="btn btn-danger">Eliminar</a></td>
                 </tr>
