@@ -32,7 +32,8 @@ public class ModeloController {
 
     @GetMapping("")
     public String home(Model model){
-        model.addAttribute("Modelos", modeloRepository.findAll());
+        List<Modelo> modelosActivos = modeloRepository.findByEliminadoFalse();
+        model.addAttribute("Modelos", modelosActivos);
         return "modelo/home";
     }
 

@@ -33,7 +33,8 @@ public class VehiculoController {
 
     @GetMapping("")
     public String home(Model model){
-        model.addAttribute("Vehiculos", vehiculoRepository.findAll());
+        List<Vehiculo> vehiculosActivos = vehiculoRepository.findByEliminadoFalse();
+        model.addAttribute("Vehiculos", vehiculosActivos);
         return "vehiculo/home";
     }
 

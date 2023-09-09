@@ -1,5 +1,8 @@
 package com.crudmarca.model;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,6 +16,8 @@ import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Table(name="Vehiculo")
+@SQLDelete(sql = "UPDATE Vehiculo SET eliminado = true WHERE vehiculo_id = ?")
+@Where(clause = "eliminado = false")
 public class Vehiculo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +37,7 @@ public class Vehiculo {
     @JoinColumn(name="modelo_id")
     private Modelo vehiculo_modelo;
 
-    
+    private boolean eliminado = Boolean.FALSE;
 
     public Vehiculo() {
         super();
@@ -62,6 +67,11 @@ public class Vehiculo {
         this.vehiculo_modelo = vehiculo_modelo;
     }
 
+    public boolean isEliminado() {
+        return eliminado;
+    }
 
-
+    public void setEliminado(boolean eliminado) {
+        this.eliminado = eliminado;
+    }
 }
