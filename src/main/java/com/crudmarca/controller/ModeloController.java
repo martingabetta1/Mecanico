@@ -55,6 +55,8 @@ public class ModeloController {
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Integer id, Model model){
         Modelo modelo = modeloRepository.getReferenceById(id);
+        List<Marca> marcas = marcaRepository.findAll();
+        model.addAttribute("Marcas", marcas);
         model.addAttribute("modelo", modelo);
         return "/modelo/edit";
     }
