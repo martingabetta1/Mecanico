@@ -29,7 +29,10 @@
                 <tr th:each="modelo:${Modelos}">
                     <td scope="row" th:text="${modelo.modelo_id}"></td>
                     <td th:text="${modelo.modelo_nombre}"></td>
-                    <td th:text="${modelo.modelo_marca.marca_nombre}"></td>
+                    <td> 
+                        <span th:if="${modelo.modelo_marca != null}" th:text="${modelo.modelo_marca.marca_nombre}"></span>
+                        <span th:if="${modelo.modelo_marca == null}">N/A</span>
+                    </td>
                     <td> <a th:href="@{/modelos/edit/{id} (id=${modelo.modelo_id}) }" class="btn btn-warning">Modificar</a></td>
                     <td> <a th:href="@{/modelos/delete/{id}(id=${modelo.modelo_id})}" class="btn btn-danger">Eliminar</a></td>
                 </tr>
