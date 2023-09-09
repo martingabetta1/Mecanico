@@ -1,4 +1,4 @@
-package com.crudmarca.crudmarca.controller;
+package com.crudmarca.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.crudmarca.crudmarca.model.Tecnico;
-import com.crudmarca.crudmarca.repository.TecnicoRepository;
+import com.crudmarca.model.Tecnico;
+import com.crudmarca.repository.TecnicoRepository;
 
 @Controller
 @RequestMapping("/tecnicos")  // http://localhost:8080/tecnicos

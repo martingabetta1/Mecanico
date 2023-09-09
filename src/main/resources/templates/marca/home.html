@@ -28,12 +28,12 @@
             </thead>
             <tbody>
                 <tr th:each="marca:${Marcas}">
-                    <td scope="row" th:text="${marca.marca_id}"></td>
-                    <td th:text="${marca.marca_nombre}"></td>
+                    <td scope="row" th:text="${marca.marcaId}"></td>
+                    <td th:text="${marca.marcaNombre}"></td>
                     <td th:text="${marca.fechaCreacion}"></td>
                     <td th:text="${marca.fechaModificacion}"></td>
-                    <td> <a th:href="@{/marcas/edit/{id} (id=${marca.marca_id}) }" class="btn btn-warning">Modificar</a></td>
-                    <td> <a th:href="@{/marcas/delete/{id}(id=${marca.marca_id})}" class="btn btn-danger">Eliminar</a></td>
+                    <td> <a th:href="@{/marcas/edit/{id} (id=${marca.marcaId}) }" class="btn btn-warning">Modificar</a></td>
+                    <td> <a th:href="@{/marcas/delete/{id}(id=${marca.marcaId})}" class="btn btn-danger">Eliminar</a></td>
                 </tr>
             </tbody>
         </table>

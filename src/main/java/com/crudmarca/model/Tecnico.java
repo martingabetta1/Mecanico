@@ -1,4 +1,4 @@
-package com.crudmarca.crudmarca.model;
+package com.crudmarca.model;
 
 import java.time.LocalDateTime;
 
