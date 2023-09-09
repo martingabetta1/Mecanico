@@ -10,30 +10,28 @@
 </head>
 
 <body>
-    <h1>Lista de marcas</h1>
+    <h1>Lista de modelos</h1>
 
-    <a th:href="@{marcas/create}" class="btn btn-primary">Nueva Marca</a>
+    <a th:href="@{modelos/create}" class="btn btn-primary">Nuevo Modelo</a>
     <div class="container">
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Nombre</th>
-                    <th scope="col">Fecha de creación</th>
-                    <th scope="col">Fecha Modificación</th>
+                    <th scope="col">Marca</th>
                     <th scope="col">Acción</th> 
                     <th scope="col">Acción</th> 
 
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="marca:${Marcas}">
-                    <td scope="row" th:text="${marca.marca_id}"></td>
-                    <td th:text="${marca.marca_nombre}"></td>
-                    <td th:text="${marca.fecha_creacion}"></td>
-                    <td th:text="${marca.fecha_modificacion}"></td>
-                    <td> <a th:href="@{/marcas/edit/{id} (id=${marca.marca_id}) }" class="btn btn-warning">Modificar</a></td>
-                    <td> <a th:href="@{/marcas/delete/{id}(id=${marca.marca_id})}" class="btn btn-danger">Eliminar</a></td>
+                <tr th:each="modelo:${Modelos}">
+                    <td scope="row" th:text="${modelo.modelo_id}"></td>
+                    <td th:text="${modelo.modelo_nombre}"></td>
+                    <td th:text="${modelo.modelo_marca.marca_nombre}"></td>
+                    <td> <a th:hremodelof="@{/modelos/edit/{id} (id=${modelo.modelo_id}) }" class="btn btn-warning">Modificar</a></td>
+                    <td> <a th:href="@{/modelos/delete/{id}(id=${modelo.modelo_id})}" class="btn btn-danger">Eliminar</a></td>
                 </tr>
             </tbody>
         </table>
