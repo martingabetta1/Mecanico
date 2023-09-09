@@ -1,5 +1,7 @@
 package com.crudmarca.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,10 +24,12 @@ public class MarcaController {
 
 
     @GetMapping("")
-    public String home(Model model){
-        model.addAttribute("Marcas", marcaRepository.findAll());
+    public String home(Model model) {
+        List<Marca> marcasActivas = marcaRepository.findByEliminadoFalse();
+        model.addAttribute("Marcas", marcasActivas);
         return "marca/home";
     }
+    
 
 
     @GetMapping("/create") // http://localhost:8080/marcas/create

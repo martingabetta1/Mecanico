@@ -3,7 +3,9 @@ package com.crudmarca.model;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.Where;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,7 +21,8 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name="Marcas", uniqueConstraints=@UniqueConstraint(columnNames={"marca_id", "marca_nombre"}))
-
+@SQLDelete(sql = "UPDATE Marcas SET eliminado = true WHERE marca_id = ?")
+@Where(clause = "eliminado = false")
 public class Marca {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,21 +43,19 @@ public class Marca {
     @UpdateTimestamp
     private LocalDateTime fecha_modificacion;
 
-    public String getMarca_nombre() {
-        return marca_nombre;
-    }
-    
+    private boolean eliminado =Boolean.FALSE;
+
     public Marca() {
         super();
     }
-
-
+    
+    
     @Override
     public String toString() {
         return "Marca [marca_id=" + marca_id + ", marca_nombre=" + marca_nombre + ", fecha_creacion=" + fecha_creacion
                 + ", fecha_modificacion=" + fecha_modificacion + "]";
     }
-
+    
     public Integer getMarca_id() {
         return marca_id;
     }
@@ -62,11 +63,15 @@ public class Marca {
     public void setMarca_id(Integer marca_id) {
         this.marca_id = marca_id;
     }
-
+    
+        public String getMarca_nombre() {
+            return marca_nombre;
+        }
+        
     public void setMarca_nombre(String marca_nombre) {
         this.marca_nombre = marca_nombre;
     }
-
+    
     public LocalDateTime getFecha_creacion() {
         return fecha_creacion;
     }
@@ -81,6 +86,16 @@ public class Marca {
 
     public void setFecha_modificacion(LocalDateTime fecha_modificacion) {
         this.fecha_modificacion = fecha_modificacion;
+    }
+
+
+    public boolean isEliminado() {
+        return eliminado;
+    }
+
+
+    public void setEliminado(boolean eliminado) {
+        this.eliminado = eliminado;
     }
 
 }
