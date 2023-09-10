@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.crudmarca.model.Cliente;
 import com.crudmarca.model.Modelo;
 import com.crudmarca.model.Vehiculo;
+import com.crudmarca.repository.ClienteRepository;
 import com.crudmarca.repository.ModeloRepository;
 import com.crudmarca.repository.VehiculoRepository;
+
 
 import org.springframework.ui.Model;
 
@@ -28,11 +31,17 @@ public class VehiculoController {
     @Autowired
     private ModeloRepository modeloRepository;
 
+    @Autowired
+    private ClienteRepository clienteRepository;
+
     @GetMapping("")
     public String home(Model model) {
         List<Vehiculo> vehiculosActivos = vehiculoRepository.findByEliminadoFalse();
         List<Modelo> modelos = modeloRepository.findAll();
+        List<Cliente> clientes = clienteRepository.findAll();
+
         model.addAttribute("Modelos", modelos);
+        model.addAttribute("clientes", clientes);
         model.addAttribute("Vehiculos", vehiculosActivos);
         return "vehiculo/home";
     }
@@ -45,8 +54,10 @@ public class VehiculoController {
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute Vehiculo vehiculo, @RequestParam("modelo_id") Integer modelo_id) {
+    public String save(@ModelAttribute Vehiculo vehiculo, @RequestParam("modelo_id") Integer modelo_id, @RequestParam("cliente_id") Integer cliente_id) {
         Modelo modeloSeleccionado = modeloRepository.findById(modelo_id).orElse(null);
+        Cliente clienteSeleccionado = clienteRepository.findById(cliente_id).orElse(null);
+        vehiculo.setVehiculo_cliente(clienteSeleccionado);
         vehiculo.setVehiculo_modelo(modeloSeleccionado);
         vehiculoRepository.save(vehiculo);
         return "redirect:/vehiculos";
@@ -55,6 +66,9 @@ public class VehiculoController {
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Integer id, Model model) {
         List<Modelo> modelos = modeloRepository.findAll();
+        List<Cliente> clientes = clienteRepository.findAll();
+
+        model.addAttribute("Clientes", clientes);
         model.addAttribute("Modelos", modelos);
         Vehiculo vehiculo = vehiculoRepository.getReferenceById(id);
         model.addAttribute("vehiculo", vehiculo);

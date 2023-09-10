@@ -11,11 +11,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 @Entity
-@Table(name="Vehiculo")
+@Table(name="Vehiculo", uniqueConstraints =@UniqueConstraint(columnNames ={"vehiculo_id", "vehiculo_patente", "vehiculo_modelo", "vehiculo_cliente"} ) )
 @SQLDelete(sql = "UPDATE Vehiculo SET eliminado = true WHERE vehiculo_id = ?")
 @Where(clause = "eliminado = false")
 public class Vehiculo {
@@ -37,6 +38,10 @@ public class Vehiculo {
     @JoinColumn(name="modelo_id")
     private Modelo vehiculo_modelo;
 
+    @ManyToOne
+    @JoinColumn(name="cliente_id")
+    private Cliente vehiculo_cliente;
+    
     private boolean eliminado = Boolean.FALSE;
 
     public Vehiculo() {
@@ -74,4 +79,14 @@ public class Vehiculo {
     public void setEliminado(boolean eliminado) {
         this.eliminado = eliminado;
     }
+
+    public Cliente getVehiculo_cliente() {
+        return vehiculo_cliente;
+    }
+
+    public void setVehiculo_cliente(Cliente vehiculo_cliente) {
+        this.vehiculo_cliente = vehiculo_cliente;
+    }
+
+    
 }
