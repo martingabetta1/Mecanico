@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cliente</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Registrar Nuevo Cliente</h1>
+        <form th:action="@{/clientes/save}" method="post">
+            <div class="form-group">
+                <label for="inputNombreCliente">Nombre de la Cliente</label>
+                <input type="text" class="form-control" id="inputNombreCliente"
+                name="cliente_nombre"
+                placeholder="Ingrese nombre del cliente">
+            </div>
+            <div class="form-group">
+                <label for="inputApellidoCliente">Apellido de la Cliente</label>
+                <input type="text" class="form-control" id="inputApellidoCliente"
+                name="cliente_apellido"
+                placeholder="Ingrese apellido del cliente">
+            </div>
+            <div class="form-group">
+                <label for="inputTelefonoCliente">Telefono de la Cliente</label>
+                <input type="text" class="form-control" id="inputTelefonoCliente"
+                name="cliente_telefono"
+                placeholder="Ingrese telefono del cliente">
+            </div>
+            <button type="submit" class="btn btn-success">Guardar</button>
+        </form>
+    </div>
+</body>
+
+</html>

@@ -1,4 +1,4 @@
-package com.crudmarca.crudmarca.controller;
+package com.crudmarca.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
