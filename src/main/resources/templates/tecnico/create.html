@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Tecnico</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Registrar Nuevo Tecnico</h1>
+        <form th:action="@{/tecnicos/save}" method="post">
+            <div class="form-group">
+                <label for="inputNombreTecnico">Nombre de la Tecnico</label>
+                <input type="text" class="form-control" id="inputNombreTecnico"
+                name="tecnico_nombre"
+                placeholder="Ingrese nombre del tecnico">
+            </div>
+            <div class="form-group">
+                <label for="inputApellidoTecnico">Apellido de la Tecnico</label>
+                <input type="text" class="form-control" id="inputApellidoTecnico"
+                name="tecnico_apellido"
+                placeholder="Ingrese apellido del tecnico">
+            </div>
+            <div class="form-group">
+                <label for="inputTelefonoTecnico">Telefono de la Tecnico</label>
+                <input type="text" class="form-control" id="inputTelefonoTecnico"
+                name="tecnico_telefono"
+                placeholder="Ingrese telefono del tecnico">
+            </div>
+            <button type="submit" class="btn btn-success">Guardar</button>
+        </form>
+    </div>
+</body>
+
+</html>
