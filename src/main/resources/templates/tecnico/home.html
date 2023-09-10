@@ -17,8 +17,8 @@
                 <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Nombre</th>
-                    <th scope="col">Fecha de creación</th>
-                    <th scope="col">Fecha Modificación</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Telefono</th>
                     <th scope="col">Editar</th>
                     <th scope="col">Eliminar</th>
                 </tr>
@@ -27,8 +27,8 @@
                 <tr th:each="tecnico : ${Tecnicos}">
                     <td scope="row" th:text="${tecnico.tecnico_id}"></td>
                     <td th:text="${tecnico.tecnico_nombre}"></td>
-                    <td th:text="${tecnico.fecha_creacion}"></td>
-                    <td th:text="${tecnico.fecha_modificacion}"></td>
+                    <td th:text="${tecnico.tecnico_apellido}"></td>
+                    <td th:text="${tecnico.tecnico_telefono}"></td>
                     <td class="action-cell">
                         <button class="btn btn-edit" data-bs-toggle="modal"
                             th:attr="data-bs-target='#editModal' + ${tecnico.tecnico_id}">
@@ -65,8 +65,24 @@
                                                     name="tecnico_nombre" th:value="${tecnico.tecnico_nombre}"
                                                     placeholder="Ingrese el nuevo nombre del técnico">
                                             </div>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon3">Apellido de la
+                                                        Tecnico</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="inputApellidoTecnico"
+                                                    name="tecnico_apellido" th:value="${tecnico.tecnico_apellido}" placeholder="Ingrese apellido del tecnico">
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon3">Telefono de la
+                                                        Tecnico</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="inputTelefonoTecnico"
+                                                    name="tecnico_telefono" th:value="${tecnico.tecnico_telefono}" placeholder="Ingrese telefono del tecnico">
+                                            </div>
+                                            <button type="submit" class="btn btn-edit modal-btn">Actualizar</button>
                                         </div>
-                                        <button type="submit" class="btn btn-edit modal-btn">Actualizar</button>
                                     </form>
                                 </div>
                                 <div class="modal-footer">
@@ -123,6 +139,22 @@
                                 </div>
                                 <input type="text" class="form-control" id="inputNombreTecnico" name="tecnico_nombre"
                                     placeholder="Ingrese el nuevo nombre del técnico">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3">Apellido de la
+                                        Tecnico</span>
+                                </div>
+                                <input type="text" class="form-control" id="inputApellidoTecnico"
+                                    name="tecnico_apellido" placeholder="Ingrese apellido del tecnico">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3">Telefono de la
+                                        Tecnico</span>
+                                </div>
+                                <input type="text" class="form-control" id="inputTelefonoTecnico"
+                                    name="tecnico_telefono" placeholder="Ingrese telefono del tecnico">
                             </div>
                         </div>
                         <div>

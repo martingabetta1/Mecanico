@@ -11,12 +11,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name="Modelo")
+@Table(name="Modelo", uniqueConstraints=@UniqueConstraint(columnNames={"modelo_id","modelo_nombre","marca_id"}))
 @SQLDelete(sql = "UPDATE Modelo SET eliminado = true WHERE modelo_id = ?")
 @Where(clause = "eliminado = false")
 public class Modelo {

@@ -1,46 +1,165 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<div th:insert="base.html"></div>
+<title>Vehículo CRUD</title>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vehiculo CRUD</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-</head>
-
-<body>
-    <h1>Lista de vehiculos</h1>
-
-    <a th:href="@{vehiculos/create}" class="btn btn-primary">Nuevo Modelo</a>
-    <div class="container">
-        <table class="table">
+<div class="container crud-container">
+    <div>
+        <div class="crud-header">
+            <div>
+                <h1 class="crud-title">Lista de vehículos</h1>
+            </div>
+            <div>
+                <a th:href="@{/vehiculos/create}" class="btn btn-create" data-bs-toggle="modal"
+                    data-bs-target="#createModal">Agregar vehículo</a>
+            </div>
+        </div>
+        <table class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Patente</th>
                     <th scope="col">Modelo</th>
-                    <th scope="col">Acción</th> 
-                    <th scope="col">Acción</th> 
-
+                    <th scope="col">Editar</th>
+                    <th scope="col">Eliminar</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="vehiculo:${Vehiculos}">
+                <tr th:each="vehiculo : ${Vehiculos}">
                     <td scope="row" th:text="${vehiculo.vehiculo_id}"></td>
                     <td th:text="${vehiculo.vehiculo_patente}"></td>
-                    <td> 
-                        <span th:if="${vehiculo.vehiculo_modelo != null}" th:text="${vehiculo.vehiculo_modelo.modelo_nombre}"></span>
+                    <td>
+                        <span th:if="${vehiculo.vehiculo_modelo != null}"
+                            th:text="${vehiculo.vehiculo_modelo.modelo_nombre}"></span>
                         <span th:if="${vehiculo.vehiculo_modelo == null}">N/A</span>
                     </td>
-                    <td> <a th:href="@{/vehiculos/edit/{id} (id=${vehiculo.vehiculo_id}) }" class="btn btn-warning">Modificar</a></td>
-                    <td> <a th:href="@{/vehiculos/delete/{id}(id=${vehiculo.vehiculo_id})}" class="btn btn-danger">Eliminar</a></td>
+                    <td class="action-cell">
+                        <button class="btn btn-edit" data-bs-toggle="modal"
+                            th:attr="data-bs-target='#editModal' + ${vehiculo.vehiculo_id}">
+                            <img class="icon-button" th:src="editar.png">
+                        </button>
+                    </td>
+                    <td class="action-cell">
+                        <button class="btn btn-delete" data-bs-toggle="modal"
+                            th:attr="data-bs-target='#deleteModal' + ${vehiculo.vehiculo_id}">
+                            <img class="icon-button" th:src="borrar.png">
+                        </button>
+                    </td>
+                    <!-- Modal de EDITAR -->
+                    <div class="modal fade" th:id="'editModal' + ${vehiculo.vehiculo_id}" tabindex="-1"
+                        th:attr="aria-labelledby='editModalLabel' + ${vehiculo.vehiculo_id}" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header edit-modal-header">
+                                    <h1 class="modal-title fs-5" th:id="'editModalLabel' + ${vehiculo.vehiculo_id}">
+                                        Editar vehículo <span th:text="${vehiculo.vehiculo_id}"></span>
+                                    </h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form th:action="@{/vehiculos/save}" method="post">
+                                        <input type="hidden" name="vehiculo_id" th:value="${vehiculo.vehiculo_id}">
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon3">Patente</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="inputPatenteVehiculo"
+                                                    name="vehiculo_patente" th:value="${vehiculo.vehiculo_patente}"
+                                                    placeholder="Ingrese la nueva patente del vehículo">
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon3">Modelo</span>
+                                                </div>
+                                                <select class="form-select" aria-label="Select Modelo"
+                                                    id="selectModeloVehiculo" name="modelo_id">
+                                                    <option disabled>Seleccionar un modelo</option>
+                                                    <option th:each="modelo : ${Modelos}"
+                                                        th:text="${modelo.modelo_nombre}"
+                                                        th:value="${modelo.modelo_id}"
+                                                        selected="${modelo.modelo_id === vehiculo.modelo_id}"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-edit modal-btn">Actualizar</button>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-closeModal modal-btn"
+                                        data-bs-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal de ELIMINAR -->
+                    <div class="modal fade" th:id="'deleteModal' + ${vehiculo.vehiculo_id}" tabindex="-1"
+                        th:attr="aria-labelledby='deleteModalLabel' + ${vehiculo.vehiculo_id}" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header cancel-modal-header">
+                                    <h1 class="modal-title fs-5" th:id="'deleteModalLabel' + ${vehiculo.vehiculo_id}">
+                                        ¿Estás seguro de que deseas eliminar el vehículo <span
+                                            th:text="${vehiculo.vehiculo_id}"></span>?
+                                    </h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Se perderán todos los datos relacionados con este vehículo.
+                                </div>
+                                <div class="modal-footer">
+                                    <a th:href="@{/vehiculos/delete/{id}(id=${vehiculo.vehiculo_id})}"
+                                        class="btn btn-delete modal-btn">Eliminar</a>
+                                    <button type="button" class="btn btn-closeModal modal-btn"
+                                        data-bs-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </tr>
             </tbody>
         </table>
-
     </div>
 
-</body>
-
-</html>
+    <!-- Modal de CREAR -->
+    <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header create-modal-header">
+                    <h1 class="modal-title fs-5" id="createModalLabel">Crear vehículo</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{/vehiculos/save}" method="post">
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3">Patente del vehículo</span>
+                                </div>
+                                <input type="text" class="form-control" id="inputPatenteVehiculo"
+                                    name="vehiculo_patente" placeholder="Ingrese la patente del vehículo">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3">Modelo del vehículo</span>
+                                </div>
+                                <select class="form-select" aria-label="Select Modelo" id="selectModeloVehiculo"
+                                    name="modelo_id">
+                                    <option selected disabled>Seleccionar un modelo</option>
+                                    <option th:each="modelo : ${Modelos}" th:text="${modelo.modelo_nombre}"
+                                        th:value="${modelo.modelo_id}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-create modal-btn">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-closeModal modal-btn" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
