@@ -3,7 +3,9 @@ package com.crudmarca.model;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.Where;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,7 +21,8 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name="Tecnico", uniqueConstraints=@UniqueConstraint(columnNames={"tecnico_id", "tecnico_nombre"}))
-
+@SQLDelete(sql = "UPDATE Tecnico SET eliminado = true WHERE tecnico_id = ?")
+@Where(clause = "eliminado = false")
 public class Tecnico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,9 +44,7 @@ public class Tecnico {
     private LocalDateTime fecha_modificacion;
 
     
-    public Tecnico(@NotNull @NotBlank @Size(max = 100) String tecnico_nombre) {
-        this.tecnico_nombre = tecnico_nombre;
-    }
+    private boolean eliminado = Boolean.FALSE;
 
     public Tecnico(){
         super();
@@ -71,23 +72,28 @@ public class Tecnico {
         this.tecnico_nombre = tecnico_nombre;
     }
 
-    public LocalDateTime getFechaCreacion() {
+    public LocalDateTime getFecha_creacion() {
         return fecha_creacion;
     }
 
-    public void setFechaCreacion(LocalDateTime fecha_creacion) {
+    public void setFecha_creacion(LocalDateTime fecha_creacion) {
         this.fecha_creacion = fecha_creacion;
     }
 
-    public LocalDateTime getFechaModificacion() {
+    public LocalDateTime getFecha_modificacion() {
         return fecha_modificacion;
     }
 
-    public void setFechaModificacion(LocalDateTime fecha_modificacion) {
+    public void setFecha_modificacion(LocalDateTime fecha_modificacion) {
         this.fecha_modificacion = fecha_modificacion;
     }
 
+    public boolean isEliminado() {
+        return eliminado;
+    }
 
-    
+    public void setEliminado(boolean eliminado) {
+        this.eliminado = eliminado;
+    }
 
 }

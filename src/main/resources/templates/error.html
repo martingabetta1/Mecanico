@@ -1,0 +1,12 @@
+<div th:insert="base.html"></div>
+<title>Autos SA</title>
+
+<main class="error-main">
+    <div class="logoContainer">
+        <img src="/error.png" class="error-logo" alt="ERROR logo"/>
+    </div>
+    <div class="error-message">
+        <h1>Ocurrió un error</h1>
+        <p th:text="${error.message}"></p>
+    </div>
+</main>

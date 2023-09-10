@@ -1,0 +1,73 @@
+<nav class="navbar bg-body-tertiary fixed-top" th:fragment="sidebar">
+  <div class="container-fluid">
+    <div class="navbar-logo-container">
+      <div style="margin: 0 10px 0 0;"><a href="/"><img class="img-logo" src="logo.png"></a></div>
+      <!-- <div><a class="navbar-brand" href="/">Taller de vehiculos</a></div> -->
+    </div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+      aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">CRUDS</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <div>
+              <img src="marca.png" class="icon-navItem">
+            </div>
+            <div>
+              <a class="nav-link active" aria-current="page" th:href="@{marcas}">Marcas</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div>
+              <img src="tecnico.png" class="icon-navItem">
+            </div>
+            <div>
+              <a class="nav-link active" aria-current="page" th:href="@{tecnicos}">Tecnicos</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div>
+              <img src="modelo.png" class="icon-navItem">
+            </div>
+            <div>
+              <a class="nav-link active" aria-current="page" th:href="@{modelos}">Modelos</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div>
+              <img src="cliente.png" class="icon-navItem">
+            </div>
+            <div>
+              <a class="nav-link active" aria-current="page" th:href="@{clientes}">Clientes</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div>
+              <img src="auto.png" class="icon-navItem">
+            </div>
+            <div>
+              <a class="nav-link active" aria-current="page" th:href="@{vehiculos}">Vehiculos</a>
+            </div>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item exit-item">
+            <div>
+              <img src="salir.png" class="icon-navItem">
+            </div>
+            <div>
+              <a class="nav-link active" aria-current="page" href="/">Salir</a>
+            </div>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</nav>

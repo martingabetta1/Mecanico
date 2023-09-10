@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.crudmarca.model.Marca;
 import com.crudmarca.model.Modelo;
 import com.crudmarca.model.Vehiculo;
 import com.crudmarca.repository.ModeloRepository;
@@ -34,7 +33,8 @@ public class VehiculoController {
 
     @GetMapping("")
     public String home(Model model){
-        model.addAttribute("Vehiculos", vehiculoRepository.findAll());
+        List<Vehiculo> vehiculosActivos = vehiculoRepository.findByEliminadoFalse();
+        model.addAttribute("Vehiculos", vehiculosActivos);
         return "vehiculo/home";
     }
 
