@@ -3,7 +3,9 @@ package com.crudmarca.model;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.Where;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,19 +20,29 @@ import jakarta.validation.constraints.Size;
 
 
 @Entity
-@Table(name="Tecnico", uniqueConstraints=@UniqueConstraint(columnNames={"tecnico_id", "tecnico_nombre"}))
-
+@Table(name="Tecnico", uniqueConstraints=@UniqueConstraint(columnNames={"tecnico_id","tecnico_nombre","tecnico_apellido","tecnico_telefono"}))
+@SQLDelete(sql = "UPDATE Tecnico SET eliminado = true WHERE tecnico_id = ?")
+@Where(clause = "eliminado = false")
 public class Tecnico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer tecnico_id;
     
+    @Size(max = 40)
+    @Column(name = "tecnico_nombre",nullable = false)
+    private String tecnico_nombre;
+
     @NotNull
     @NotBlank
     @Size(max = 40)
-    @Column(name = "tecnico_nombre", unique = true,nullable = false)
-    private String tecnico_nombre;
+    @Column(name = "tecnico_apellido")
+    private String tecnico_apellido;
 
+    @NotNull
+    @NotBlank
+    @Size(max = 40)
+    @Column(name = "tecnico_telefono", unique = true)
+    private String tecnico_telefono;
 
     @Column(name = "fecha_creacion", updatable= false)
     @CreationTimestamp
@@ -41,9 +53,7 @@ public class Tecnico {
     private LocalDateTime fecha_modificacion;
 
     
-    public Tecnico(@NotNull @NotBlank @Size(max = 100) String tecnico_nombre) {
-        this.tecnico_nombre = tecnico_nombre;
-    }
+    private boolean eliminado = Boolean.FALSE;
 
     public Tecnico(){
         super();
@@ -71,23 +81,49 @@ public class Tecnico {
         this.tecnico_nombre = tecnico_nombre;
     }
 
-    public LocalDateTime getFechaCreacion() {
+
+    public String getTecnico_apellido() {
+        return tecnico_apellido;
+    }
+
+
+    public void setTecnico_apellido(String tecnico_apellido) {
+        this.tecnico_apellido = tecnico_apellido;
+    }
+
+
+    public String getTecnico_telefono() {
+        return tecnico_telefono;
+    }
+
+
+    public void setTecnico_telefono(String tecnico_telefono) {
+        this.tecnico_telefono = tecnico_telefono;
+    }
+
+
+    public LocalDateTime getFecha_creacion() {
         return fecha_creacion;
     }
 
-    public void setFechaCreacion(LocalDateTime fecha_creacion) {
+    public void setFecha_creacion(LocalDateTime fecha_creacion) {
         this.fecha_creacion = fecha_creacion;
     }
 
-    public LocalDateTime getFechaModificacion() {
+    public LocalDateTime getFecha_modificacion() {
         return fecha_modificacion;
     }
 
-    public void setFechaModificacion(LocalDateTime fecha_modificacion) {
+    public void setFecha_modificacion(LocalDateTime fecha_modificacion) {
         this.fecha_modificacion = fecha_modificacion;
     }
 
+    public boolean isEliminado() {
+        return eliminado;
+    }
 
-    
+    public void setEliminado(boolean eliminado) {
+        this.eliminado = eliminado;
+    }
 
 }

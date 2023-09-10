@@ -1,15 +1,15 @@
 <div th:insert="base.html"></div>
-<title>Técnico</title>
+<title>Cliente CRUD</title>
 
 <div class="container crud-container">
     <div>
         <div class="crud-header">
             <div>
-                <h1 class="crud-title">Lista de técnicos</h1>
+                <h1 class="crud-title">Lista de clientes</h1>
             </div>
             <div>
-                <a th:href="@{/tecnicos/create}" class="btn btn-create" data-bs-toggle="modal"
-                    data-bs-target="#createModal">Agregar técnico</a>
+                <a th:href="@{/clientes/create}" class="btn btn-create" data-bs-toggle="modal"
+                    data-bs-target="#createModal">Agregar cliente</a>
             </div>
         </div>
         <table class="table table-bordered table-striped">
@@ -18,71 +18,71 @@
                     <th scope="col">Id</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Apellido</th>
-                    <th scope="col">Telefono</th>
+                    <th scope="col">Número de teléfono</th>
                     <th scope="col">Editar</th>
                     <th scope="col">Eliminar</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="tecnico : ${Tecnicos}">
-                    <td scope="row" th:text="${tecnico.tecnico_id}"></td>
-                    <td th:text="${tecnico.tecnico_nombre}"></td>
-                    <td th:text="${tecnico.tecnico_apellido}"></td>
-                    <td th:text="${tecnico.tecnico_telefono}"></td>
+                <tr th:each="cliente : ${Clientes}">
+                    <td scope="row" th:text="${cliente.cliente_id}"></td>
+                    <td th:text="${cliente.cliente_nombre}"></td>
+                    <td th:text="${cliente.cliente_apellido}"></td>
+                    <td th:text="${cliente.cliente_telefono}"></td>
                     <td class="action-cell">
                         <button class="btn btn-edit" data-bs-toggle="modal"
-                            th:attr="data-bs-target='#editModal' + ${tecnico.tecnico_id}">
+                            th:attr="data-bs-target='#editModal' + ${cliente.cliente_id}">
                             <img class="icon-button" th:src="editar.png">
                         </button>
                     </td>
                     <td class="action-cell">
                         <button class="btn btn-delete" data-bs-toggle="modal"
-                            th:attr="data-bs-target='#deleteModal' + ${tecnico.tecnico_id}">
+                            th:attr="data-bs-target='#deleteModal' + ${cliente.cliente_id}">
                             <img class="icon-button" th:src="borrar.png">
                         </button>
                     </td>
                     <!-- Modal de EDITAR -->
-                    <div class="modal fade" th:id="'editModal' + ${tecnico.tecnico_id}" tabindex="-1"
-                        th:attr="aria-labelledby='editModalLabel' + ${tecnico.tecnico_id}" aria-hidden="true">
+                    <div class="modal fade" th:id="'editModal' + ${cliente.cliente_id}" tabindex="-1"
+                        th:attr="aria-labelledby='editModalLabel' + ${cliente.cliente_id}" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header edit-modal-header">
-                                    <h1 class="modal-title fs-5" th:id="'editModalLabel' + ${tecnico.tecnico_id}">
-                                        Editar técnico <span th:text="${tecnico.tecnico_id}"></span>
+                                    <h1 class="modal-title fs-5" th:id="'editModalLabel' + ${cliente.cliente_id}">
+                                        Editar cliente <span th:text="${cliente.cliente_id}"></span>
                                     </h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form th:action="@{/tecnicos/save}" method="post">
-                                        <input type="hidden" name="tecnico_id" th:value="${tecnico.tecnico_id}">
+                                    <form th:action="@{/clientes/save}" method="post">
+                                        <input type="hidden" name="cliente_id" th:value="${cliente.cliente_id}">
                                         <div class="form-group">
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="basic-addon3">Nombre</span>
                                                 </div>
-                                                <input type="text" class="form-control" id="inputNombreTecnico"
-                                                    name="tecnico_nombre" th:value="${tecnico.tecnico_nombre}"
-                                                    placeholder="Ingrese el nuevo nombre del técnico">
+                                                <input type="text" class="form-control" id="inputNombreCliente"
+                                                    name="cliente_nombre" th:value="${cliente.cliente_nombre}"
+                                                    placeholder="Ingrese el nuevo nombre del cliente">
                                             </div>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text" id="basic-addon3">Apellido de la
-                                                        Tecnico</span>
+                                                    <span class="input-group-text" id="basic-addon3">Apellido</span>
                                                 </div>
-                                                <input type="text" class="form-control" id="inputApellidoTecnico"
-                                                    name="tecnico_apellido" th:value="${tecnico.tecnico_apellido}" placeholder="Ingrese apellido del tecnico">
+                                                <input type="text" class="form-control" id="inputApellidoCliente"
+                                                    name="cliente_apellido" th:value="${cliente.cliente_apellido}"
+                                                    placeholder="Ingrese el nuevo apellido del cliente">
                                             </div>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text" id="basic-addon3">Telefono de la
-                                                        Tecnico</span>
+                                                    <span class="input-group-text" id="basic-addon3">Teléfono</span>
                                                 </div>
-                                                <input type="text" class="form-control" id="inputTelefonoTecnico"
-                                                    name="tecnico_telefono" th:value="${tecnico.tecnico_telefono}" placeholder="Ingrese telefono del tecnico">
+                                                <input type="text" class="form-control" id="inputTelefonoCliente"
+                                                    name="cliente_telefono" th:value="${cliente.cliente_telefono}"
+                                                    placeholder="Ingrese el nuevo teléfono del cliente">
                                             </div>
-                                            <button type="submit" class="btn btn-edit modal-btn">Actualizar</button>
                                         </div>
+                                        <button type="submit" class="btn btn-edit modal-btn">Actualizar</button>
                                     </form>
                                 </div>
                                 <div class="modal-footer">
@@ -93,23 +93,23 @@
                         </div>
                     </div>
                     <!-- Modal de ELIMINAR -->
-                    <div class="modal fade" th:id="'deleteModal' + ${tecnico.tecnico_id}" tabindex="-1"
-                        th:attr="aria-labelledby='deleteModalLabel' + ${tecnico.tecnico_id}" aria-hidden="true">
+                    <div class="modal fade" th:id="'deleteModal' + ${cliente.cliente_id}" tabindex="-1"
+                        th:attr="aria-labelledby='deleteModalLabel' + ${cliente.cliente_id}" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header cancel-modal-header">
-                                    <h1 class="modal-title fs-5" th:id="'deleteModalLabel' + ${tecnico.tecnico_id}">
-                                        ¿Estás seguro de que deseas eliminar el técnico <span
-                                            th:text="${tecnico.tecnico_id}"></span>?
+                                    <h1 class="modal-title fs-5" th:id="'deleteModalLabel' + ${cliente.cliente_id}">
+                                        ¿Estás seguro de que deseas eliminar al cliente <span
+                                            th:text="${cliente.cliente_id}"></span>?
                                     </h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    Se perderán todos los datos relacionados con este técnico.
+                                    Se perderán todos los datos relacionados con este cliente.
                                 </div>
                                 <div class="modal-footer">
-                                    <a th:href="@{/tecnicos/delete/{id}(id=${tecnico.tecnico_id})}"
+                                    <a th:href="@{/clientes/delete/{id}(id=${cliente.cliente_id})}"
                                         class="btn btn-delete modal-btn">Eliminar</a>
                                     <button type="button" class="btn btn-closeModal modal-btn"
                                         data-bs-dismiss="modal">Cerrar</button>
@@ -127,34 +127,32 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header create-modal-header">
-                    <h1 class="modal-title fs-5" id="createModalLabel">Crear técnico</h1>
+                    <h1 class="modal-title fs-5" id="createModalLabel">Crear cliente</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form th:action="@{/tecnicos/save}" method="post">
+                    <form th:action="@{/clientes/save}" method="post">
                         <div class="form-group">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon3">Nombre del técnico</span>
+                                    <span class="input-group-text" id="basic-addon3">Nombre del cliente</span>
                                 </div>
-                                <input type="text" class="form-control" id="inputNombreTecnico" name="tecnico_nombre"
-                                    placeholder="Ingrese el nuevo nombre del técnico">
+                                <input type="text" class="form-control" id="inputNombreCliente" name="cliente_nombre"
+                                    placeholder="Ingrese el nuevo nombre del cliente">
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon3">Apellido de la
-                                        Tecnico</span>
+                                    <span class="input-group-text" id="basic-addon3">Apellido del cliente</span>
                                 </div>
-                                <input type="text" class="form-control" id="inputApellidoTecnico"
-                                    name="tecnico_apellido" placeholder="Ingrese apellido del tecnico">
+                                <input type="text" class="form-control" id="inputApellidoCliente"
+                                    name="cliente_apellido" placeholder="Ingrese el nuevo apellido del cliente">
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon3">Telefono de la
-                                        Tecnico</span>
+                                    <span class="input-group-text" id="basic-addon3">Teléfono del cliente</span>
                                 </div>
-                                <input type="text" class="form-control" id="inputTelefonoTecnico"
-                                    name="tecnico_telefono" placeholder="Ingrese telefono del tecnico">
+                                <input type="text" class="form-control" id="inputTelefonoCliente"
+                                    name="cliente_telefono" placeholder="Ingrese el nuevo teléfono del cliente">
                             </div>
                         </div>
                         <div>

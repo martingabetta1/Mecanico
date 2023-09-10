@@ -32,10 +32,12 @@ public class ModeloController {
 
     @GetMapping("")
     public String home(Model model){
-        model.addAttribute("Modelos", modeloRepository.findAll());
+        List<Modelo> modelosActivos = modeloRepository.findByEliminadoFalse();
+        model.addAttribute("Modelos", modelosActivos);
+        List<Marca> marcas = marcaRepository.findAll();
+        model.addAttribute("Marcas", marcas);
         return "modelo/home";
     }
-
 
     @GetMapping("/create") // http://localhost:8080/modelos/create
     public String create(Model model){
