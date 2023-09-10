@@ -20,6 +20,20 @@
                 th:value="${tecnico.tecnico_nombre}"
                 placeholder="Ingrese el nuevo nombre del tecnico">
             </div>
+            <div class="form-group">
+                <label for="inputApellidoTecnico">Apellido</label>
+                <input type="text" class="form-control" id="inputApellidoTecnico"
+                name="tecnico_apellido"
+                th:value="${tecnico.tecnico_apellido}"
+                placeholder="Ingrese el nuevo apellido del tecnico">
+            </div>
+            <div class="form-group">
+                <label for="inputTelefonoTecnico">Telefono</label>
+                <input type="text" class="form-control" id="inputTelefonoTecnico"
+                name="tecnico_telefono"
+                th:value="${tecnico.tecnico_telefono}"
+                placeholder="Ingrese el nuevo telefono del tecnico">
+            </div>
             <button type="submit" class="btn btn-success">Actualizar</button>
         </form>
     </div>

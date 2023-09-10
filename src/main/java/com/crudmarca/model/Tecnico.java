@@ -32,6 +32,17 @@ public class Tecnico {
     @Column(name = "tecnico_nombre", unique = true,nullable = false)
     private String tecnico_nombre;
 
+    @NotNull
+    @NotBlank
+    @Size(max = 40)
+    @Column(name = "tecnico_apellido")
+    private String tecnico_apellido;
+
+    @NotNull
+    @NotBlank
+    @Size(max = 40)
+    @Column(name = "tecnico_telefono", unique = true)
+    private String tecnico_telefono;
 
     @Column(name = "fecha_creacion", updatable= false)
     @CreationTimestamp
@@ -69,6 +80,27 @@ public class Tecnico {
     public void setTecnico_nombre(String tecnico_nombre) {
         this.tecnico_nombre = tecnico_nombre;
     }
+
+
+    public String getTecnico_apellido() {
+        return tecnico_apellido;
+    }
+
+
+    public void setTecnico_apellido(String tecnico_apellido) {
+        this.tecnico_apellido = tecnico_apellido;
+    }
+
+
+    public String getTecnico_telefono() {
+        return tecnico_telefono;
+    }
+
+
+    public void setTecnico_telefono(String tecnico_telefono) {
+        this.tecnico_telefono = tecnico_telefono;
+    }
+
 
     public LocalDateTime getFecha_creacion() {
         return fecha_creacion;

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cliente CRUD</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+
+<body>
+    <h1>Lista de clientes</h1>
+
+    <a th:href="@{clientes/create}" class="btn btn-primary">Nuevo cliente</a>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Numero de telefono</th>
+                    <th scope="col">Acción</th> 
+                    <th scope="col">Acción</th> 
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="cliente:${Clientes}">
+                    <td scope="row" th:text="${cliente.cliente_id}"></td>
+                    <td th:text="${cliente.cliente_nombre}"></td>
+                    <td th:text="${cliente.cliente_apellido}"></td>
+                    <td th:text="${cliente.cliente_telefono}"></td>
+                    <!--<td th:text="${cliente.fecha_creacion}"></td> ME TIRA ERROR CON ESTO
+                    <td th:text="${cliente.fecha_modificacion}"></td> -->
+                    <td> <a th:href="@{/clientes/edit/{id} (id=${cliente.cliente_id}) }" class="btn btn-warning">Modificar</a></td>
+                    <td> <a th:href="@{/clientes/delete/{id}(id=${cliente.cliente_id})}" class="btn btn-danger">Eliminar</a></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+</body>
+
+</html>
