@@ -1,0 +1,27 @@
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="editModalLabel">Editar</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/marcas/save}" method="post">
+                    <input type="hidden" name="marca_id" th:value="${marca.marca_id}">
+        
+                    <div class="form-group">
+                        <label for="inputNombreMarca">Nombre</label>
+                        <input type="text" class="form-control" id="inputNombreMarca"
+                        name="marca_nombre"
+                        th:value="${marca.marca_nombre}"
+                        placeholder="Ingrese el nuevo nombre de la marca">
+                    </div>
+                    <button type="submit" class="btn btn-success">Actualizar</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
