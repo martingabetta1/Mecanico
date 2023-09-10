@@ -1,4 +1,4 @@
-package com.crudmarca.crudmarca;
+package com.crudmarca;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

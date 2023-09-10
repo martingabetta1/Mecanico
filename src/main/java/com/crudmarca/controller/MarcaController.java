@@ -1,7 +1,7 @@
-package com.crudmarca.crudmarca.controller;
+package com.crudmarca.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,24 +11,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.crudmarca.crudmarca.model.Marca;
-import com.crudmarca.crudmarca.repository.MarcaRepository;
+import com.crudmarca.model.Marca;
+import com.crudmarca.repository.MarcaRepository;
 
 @Controller
 @RequestMapping("/marcas")  // http://localhost:8080/marcas
 public class MarcaController {
 
-    private final Logger logger = LoggerFactory.getLogger(Marca.class);
 
     @Autowired
     private MarcaRepository marcaRepository;
 
 
     @GetMapping("")
-    public String home(Model model){
-        model.addAttribute("Marcas", marcaRepository.findAll());
+    public String home(Model model) {
+        List<Marca> marcasActivas = marcaRepository.findByEliminadoFalse();
+        model.addAttribute("Marcas", marcasActivas);
         return "marca/home";
     }
+    
 
 
     @GetMapping("/create") // http://localhost:8080/marcas/create
@@ -45,7 +46,6 @@ public class MarcaController {
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Integer id, Model model){
         Marca marca = marcaRepository.getReferenceById(id);
-        logger.info("Marca Obtenida, {}", marca);
         model.addAttribute("marca", marca);
         return "/marca/edit";
     }
@@ -53,7 +53,6 @@ public class MarcaController {
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Integer id){
         Marca marca = marcaRepository.getReferenceById(id);
-        logger.info("Marca Eliminada, {}", marca);
         marcaRepository.delete(marca);
         return "redirect:/marcas";
     }

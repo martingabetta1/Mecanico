@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehiculo CRUD</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+
+<body>
+    <h1>Lista de vehiculos</h1>
+
+    <a th:href="@{vehiculos/create}" class="btn btn-primary">Nuevo Modelo</a>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Patente</th>
+                    <th scope="col">Modelo</th>
+                    <th scope="col">Acción</th> 
+                    <th scope="col">Acción</th> 
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="vehiculo:${Vehiculos}">
+                    <td scope="row" th:text="${vehiculo.vehiculo_id}"></td>
+                    <td th:text="${vehiculo.vehiculo_patente}"></td>
+                    <td> 
+                        <span th:if="${vehiculo.vehiculo_modelo != null}" th:text="${vehiculo.vehiculo_modelo.modelo_nombre}"></span>
+                        <span th:if="${vehiculo.vehiculo_modelo == null}">N/A</span>
+                    </td>
+                    <td> <a th:href="@{/vehiculos/edit/{id} (id=${vehiculo.vehiculo_id}) }" class="btn btn-warning">Modificar</a></td>
+                    <td> <a th:href="@{/vehiculos/delete/{id}(id=${vehiculo.vehiculo_id})}" class="btn btn-danger">Eliminar</a></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+</body>
+
+</html>

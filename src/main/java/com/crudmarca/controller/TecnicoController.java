@@ -1,7 +1,8 @@
-package com.crudmarca.crudmarca.controller;
+package com.crudmarca.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,14 +12,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.crudmarca.crudmarca.model.Tecnico;
-import com.crudmarca.crudmarca.repository.TecnicoRepository;
+import com.crudmarca.model.Tecnico;
+import com.crudmarca.repository.TecnicoRepository;
 
 @Controller
 @RequestMapping("/tecnicos")  // http://localhost:8080/tecnicos
 public class TecnicoController {
-
-    private final Logger logger = LoggerFactory.getLogger(Tecnico.class);
 
     @Autowired
     private TecnicoRepository tecnicoRepository;
@@ -26,7 +25,8 @@ public class TecnicoController {
 
     @GetMapping("")
     public String home(Model model){
-        model.addAttribute("Tecnicos", tecnicoRepository.findAll());
+        List<Tecnico> tecnicosActivos = tecnicoRepository.findByEliminadoFalse();
+        model.addAttribute("Tecnicos", tecnicosActivos);
         return "tecnico/home";
     }
 

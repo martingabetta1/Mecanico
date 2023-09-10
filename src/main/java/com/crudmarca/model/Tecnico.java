@@ -1,9 +1,11 @@
-package com.crudmarca.crudmarca.model;
+package com.crudmarca.model;
 
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.Where;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,7 +21,8 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name="Tecnico", uniqueConstraints=@UniqueConstraint(columnNames={"tecnico_id", "tecnico_nombre"}))
-
+@SQLDelete(sql = "UPDATE Tecnico SET eliminado = true WHERE tecnico_id = ?")
+@Where(clause = "eliminado = false")
 public class Tecnico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,23 +30,21 @@ public class Tecnico {
     
     @NotNull
     @NotBlank
-    @Size(max = 100)
+    @Size(max = 40)
     @Column(name = "tecnico_nombre", unique = true,nullable = false)
     private String tecnico_nombre;
 
 
     @Column(name = "fecha_creacion", updatable= false)
     @CreationTimestamp
-    private LocalDateTime fechaCreacion;  
+    private LocalDateTime fecha_creacion;  
 
     @Column(name = "fecha_modificacion") 
     @UpdateTimestamp
-    private LocalDateTime fechaModificacion;
+    private LocalDateTime fecha_modificacion;
 
     
-    public Tecnico(@NotNull @NotBlank @Size(max = 100) String tecnico_nombre) {
-        this.tecnico_nombre = tecnico_nombre;
-    }
+    private boolean eliminado = Boolean.FALSE;
 
     public Tecnico(){
         super();
@@ -51,8 +52,8 @@ public class Tecnico {
 
     @Override
     public String toString() {
-        return "Tecnico [tecnico_id=" + tecnico_id + ", tecnico_nombre=" + tecnico_nombre + ", fechaCreacion="
-                + fechaCreacion + ", fechaModificacion=" + fechaModificacion + "]";
+        return "Tecnico [tecnico_id=" + tecnico_id + ", tecnico_nombre=" + tecnico_nombre + ", fecha_creacion="
+                + fecha_creacion + ", fecha_modificacion=" + fecha_modificacion + "]";
     }
 
     public Integer getTecnico_id() {
@@ -71,23 +72,28 @@ public class Tecnico {
         this.tecnico_nombre = tecnico_nombre;
     }
 
-    public LocalDateTime getFechaCreacion() {
-        return fechaCreacion;
+    public LocalDateTime getFecha_creacion() {
+        return fecha_creacion;
     }
 
-    public void setFechaCreacion(LocalDateTime fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
+    public void setFecha_creacion(LocalDateTime fecha_creacion) {
+        this.fecha_creacion = fecha_creacion;
     }
 
-    public LocalDateTime getFechaModificacion() {
-        return fechaModificacion;
+    public LocalDateTime getFecha_modificacion() {
+        return fecha_modificacion;
     }
 
-    public void setFechaModificacion(LocalDateTime fechaModificacion) {
-        this.fechaModificacion = fechaModificacion;
+    public void setFecha_modificacion(LocalDateTime fecha_modificacion) {
+        this.fecha_modificacion = fecha_modificacion;
     }
 
+    public boolean isEliminado() {
+        return eliminado;
+    }
 
-    
+    public void setEliminado(boolean eliminado) {
+        this.eliminado = eliminado;
+    }
 
 }
