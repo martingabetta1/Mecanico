@@ -27,8 +27,8 @@
                 <tr th:each="tecnico : ${Tecnicos}">
                     <td scope="row" th:text="${tecnico.tecnico_id}"></td>
                     <td th:text="${tecnico.tecnico_nombre}"></td>
-                    <td th:text="${tecnico.fechaCreacion}"></td>
-                    <td th:text="${tecnico.fechaModificacion}"></td>
+                    <td th:text="${tecnico.fecha_creacion}"></td>
+                    <td th:text="${tecnico.fecha_modificacion}"></td>
                     <td class="action-cell">
                         <button class="btn btn-edit" data-bs-toggle="modal"
                             th:attr="data-bs-target='#editModal' + ${tecnico.tecnico_id}">

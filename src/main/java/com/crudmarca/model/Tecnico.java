@@ -28,8 +28,6 @@ public class Tecnico {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer tecnico_id;
     
-    @NotNull
-    @NotBlank
     @Size(max = 40)
     @Column(name = "tecnico_nombre", unique = true,nullable = false)
     private String tecnico_nombre;

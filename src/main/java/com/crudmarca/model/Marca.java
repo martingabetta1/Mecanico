@@ -28,20 +28,9 @@ public class Marca {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer marca_id;
     
-    @NotNull
-    @NotBlank
     @Size(max = 100)
     @Column(name = "marca_nombre", unique = true,nullable = false)
     private String marca_nombre;
-
-
-    @Column(name = "fecha_creacion", updatable= false)
-    @CreationTimestamp
-    private LocalDateTime fecha_creacion;  
-
-    @Column(name = "fecha_modificacion") 
-    @UpdateTimestamp
-    private LocalDateTime fecha_modificacion;
 
     private boolean eliminado =Boolean.FALSE;
 
@@ -52,8 +41,7 @@ public class Marca {
     
     @Override
     public String toString() {
-        return "Marca [marca_id=" + marca_id + ", marca_nombre=" + marca_nombre + ", fecha_creacion=" + fecha_creacion
-                + ", fecha_modificacion=" + fecha_modificacion + "]";
+        return "Marca [marca_id=" + marca_id + ", marca_nombre=" + marca_nombre + "]";
     }
     
     public Integer getMarca_id() {
@@ -71,23 +59,6 @@ public class Marca {
     public void setMarca_nombre(String marca_nombre) {
         this.marca_nombre = marca_nombre;
     }
-    
-    public LocalDateTime getFecha_creacion() {
-        return fecha_creacion;
-    }
-
-    public void setFecha_creacion(LocalDateTime fecha_creacion) {
-        this.fecha_creacion = fecha_creacion;
-    }
-
-    public LocalDateTime getFecha_modificacion() {
-        return fecha_modificacion;
-    }
-
-    public void setFecha_modificacion(LocalDateTime fecha_modificacion) {
-        this.fecha_modificacion = fecha_modificacion;
-    }
-
 
     public boolean isEliminado() {
         return eliminado;

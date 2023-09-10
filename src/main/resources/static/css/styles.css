@@ -61,6 +61,7 @@ td {
 
 .action-cell{
     text-align: center;
+    width: 10%!important;
 }
 
 .crud-container {
@@ -126,6 +127,10 @@ td {
 
 .img-logo {
     width: 70px;
+}
+
+.offcanvas{
+    z-index: 999999;
 }
 
 .offcanvas-header {
@@ -236,7 +241,7 @@ input[type="text"]:hover {
 /* footer */
 footer {
     display: flex;
-    z-index: 99999;
+    z-index: 10;
     position: fixed;
     bottom: 0;
     width: 100%;
