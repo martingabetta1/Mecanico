@@ -18,6 +18,7 @@
                     <th scope="col">Id</th>
                     <th scope="col">Patente</th>
                     <th scope="col">Modelo</th>
+                    <th scope="col">Cliente</th>
                     <th scope="col">Editar</th>
                     <th scope="col">Eliminar</th>
                 </tr>
@@ -30,6 +31,11 @@
                         <span th:if="${vehiculo.vehiculo_modelo != null}"
                             th:text="${vehiculo.vehiculo_modelo.modelo_nombre}"></span>
                         <span th:if="${vehiculo.vehiculo_modelo == null}">N/A</span>
+                    </td>
+                    <td>
+                        <span th:if="${vehiculo.vehiculo_cliente != null}"
+                            th:text="${vehiculo.vehiculo_cliente.cliente_nombre}+ ' ' + ${vehiculo.vehiculo_cliente.cliente_apellido}"></span>
+                        <span th:if="${vehiculo.vehiculo_cliente == null}">N/A</span>
                     </td>
                     <td class="action-cell">
                         <button class="btn btn-edit" data-bs-toggle="modal"
@@ -71,14 +77,24 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="basic-addon3">Modelo</span>
                                                 </div>
-                                                <select class="form-select" aria-label="Select Modelo"
-                                                    id="selectModeloVehiculo" name="modelo_id">
-                                                    <option disabled>Seleccionar un modelo</option>
+                                                <select class="form-select" aria-label="Select Modelo" id="selectModeloVehiculo" name="modelo_id">
+                                                    <option selected disabled>Seleccionar un modelo</option>
                                                     <option th:each="modelo : ${Modelos}"
-                                                        th:text="${modelo.modelo_nombre}"
-                                                        th:value="${modelo.modelo_id}"
-                                                        selected="${modelo.modelo_id === vehiculo.modelo_id}"></option>
+                                                            th:text="${modelo.modelo_nombre}"
+                                                            th:value="${modelo.modelo_id}"
+                                                            th:selected="${modelo.modelo_id == vehiculo.vehiculo_modelo.modelo_id}"></option>
                                                 </select>
+                                                
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon3">Cliente</span>
+                                                </div>
+                                                <select class="form-select" aria-label="Select Cliente" id="selectClienteVehiculo" name="cliente_id">
+                                                    <option disabled>Seleccionar un cliente</option>
+                                                    <option th:each="cliente : ${Clientes}"
+                                                            th:text="${cliente.cliente_nombre + ' ' + cliente.cliente_apellido}"
+                                                            th:value="${cliente.cliente_id}"
+                                                            th:selected="${cliente.cliente_id == vehiculo.vehiculo_cliente.cliente_id}"></option>
+                                                </select>                                                
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-edit modal-btn">Actualizar</button>
@@ -149,6 +165,15 @@
                                     <option th:each="modelo : ${Modelos}" th:text="${modelo.modelo_nombre}"
                                         th:value="${modelo.modelo_id}"></option>
                                 </select>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3">Cliente</span>
+                                </div>
+                                <select class="form-select" aria-label="Select Cliente"
+                                id="selectClienteVehiculo" name="cliente_id">
+                                <option selected disabled>Seleccionar un cliente</option>
+                                <option th:each="cliente : ${Clientes}"
+                                th:text="${cliente.cliente_nombre}+ ' ' + ${cliente.cliente_apellido}" th:value="${cliente.cliente_id}"></option>
+                            </select>
                             </div>
                         </div>
                         <div>
