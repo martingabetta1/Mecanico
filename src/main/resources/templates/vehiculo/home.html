@@ -161,7 +161,7 @@
                                 </div>
                                 <select class="form-select" aria-label="Select Modelo" id="selectModeloVehiculo"
                                     name="modelo_id" required>
-                                    <option selected disabled>Seleccionar un modelo</option>
+                                    <option selected disabled value="">Seleccionar un modelo</option>
                                     <option th:each="modelo : ${Modelos}" th:text="${modelo.modelo_nombre}"
                                         th:value="${modelo.modelo_id}"></option>
                                 </select>
@@ -169,8 +169,8 @@
                                     <span class="input-group-text" id="basic-addon3">Cliente</span>
                                 </div>
                                 <select class="form-select" aria-label="Select Cliente"
-                                id="selectClienteVehiculo" name="cliente_id">
-                                <option selected disabled>Seleccionar un cliente</option>
+                                id="selectClienteVehiculo" name="cliente_id" required>
+                                <option selected disabled value="">Seleccionar un cliente</option>
                                 <option th:each="cliente : ${Clientes}"
                                 th:text="${cliente.cliente_nombre}+ ' ' + ${cliente.cliente_apellido}" th:value="${cliente.cliente_id}"></option>
                             </select>

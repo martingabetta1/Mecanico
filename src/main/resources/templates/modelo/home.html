@@ -134,8 +134,8 @@
                                     placeholder="Ingrese el nuevo nombre del modelo" oninput="validarModelo(this)" required><br>
                             </div>
                             <select class="form-select" aria-label="Select Marca" id="selectMarcaModelo"
-                                name="marca_id">
-                                <option selected disabled>Seleccionar una marca</option>
+                                name="marca_id" required>
+                                <option selected disabled value="">Seleccionar una marca</option>
                                 <option th:each="marca:${Marcas}" th:text="${marca.marca_nombre}"
                                     th:value="${marca.marca_id}"></option>
                             </select>
