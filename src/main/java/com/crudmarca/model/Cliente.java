@@ -21,7 +21,7 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name="Cliente", uniqueConstraints=@UniqueConstraint(columnNames={"cliente_id", "cliente_nombre", "cliente_apellido", "cliente_telefono"}))
-@SQLDelete(sql = "UPDATE Marcas SET eliminado = true WHERE marca_id = ?")
+@SQLDelete(sql = "UPDATE Cliente SET eliminado = true WHERE cliente_id = ?")
 @Where(clause = "eliminado = false")
 public class Cliente {
     @Id
@@ -132,7 +132,5 @@ public class Cliente {
         this.eliminado = eliminado;
     }
 
-
-    
 
 }
