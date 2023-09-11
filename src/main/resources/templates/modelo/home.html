@@ -69,9 +69,10 @@
                                             </div>
                                             <select class="form-select" aria-label="Select Marca" id="selectMarcaModelo"
                                                 name="marca_id">
-                                                <option selected disabled>Seleccionar una marca</option>
+                                                <option disabled>Seleccionar una marca</option>
                                                 <option th:each="marca:${Marcas}" th:text="${marca.marca_nombre}"
-                                                    th:value="${marca.marca_id}"></option>
+                                                    th:value="${marca.marca_id}"
+                                                    selected="${marca.marca_id === modelo.marca_id}"></option>
                                             </select>
                                         </div>
                                         <button type="submit" class="btn btn-edit modal-btn">Actualizar</button>

@@ -18,11 +18,9 @@ import com.crudmarca.repository.VehiculoRepository;
 
 import org.springframework.ui.Model;
 
-
 @Controller
-@RequestMapping("/vehiculos")  // http://localhost:8080/vehiculos
+@RequestMapping("/vehiculos") // http://localhost:8080/vehiculos
 public class VehiculoController {
-
 
     @Autowired
     private VehiculoRepository vehiculoRepository;
@@ -30,24 +28,24 @@ public class VehiculoController {
     @Autowired
     private ModeloRepository modeloRepository;
 
-
     @GetMapping("")
-    public String home(Model model){
+    public String home(Model model) {
         List<Vehiculo> vehiculosActivos = vehiculoRepository.findByEliminadoFalse();
+        List<Modelo> modelos = modeloRepository.findAll();
+        model.addAttribute("Modelos", modelos);
         model.addAttribute("Vehiculos", vehiculosActivos);
         return "vehiculo/home";
     }
 
-
     @GetMapping("/create") // http://localhost:8080/vehiculo/create
-    public String create(Model model){
+    public String create(Model model) {
         List<Modelo> modelos = modeloRepository.findAll();
         model.addAttribute("Modelos", modelos);
         return "vehiculo/create";
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute Vehiculo vehiculo, @RequestParam("modelo_id") Integer modelo_id){
+    public String save(@ModelAttribute Vehiculo vehiculo, @RequestParam("modelo_id") Integer modelo_id) {
         Modelo modeloSeleccionado = modeloRepository.findById(modelo_id).orElse(null);
         vehiculo.setVehiculo_modelo(modeloSeleccionado);
         vehiculoRepository.save(vehiculo);
@@ -55,7 +53,7 @@ public class VehiculoController {
     }
 
     @GetMapping("/edit/{id}")
-    public String edit(@PathVariable Integer id, Model model){
+    public String edit(@PathVariable Integer id, Model model) {
         List<Modelo> modelos = modeloRepository.findAll();
         model.addAttribute("Modelos", modelos);
         Vehiculo vehiculo = vehiculoRepository.getReferenceById(id);
@@ -64,7 +62,7 @@ public class VehiculoController {
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable Integer id){
+    public String delete(@PathVariable Integer id) {
         Vehiculo vehiculo = vehiculoRepository.getReferenceById(id);
         vehiculoRepository.delete(vehiculo);
         return "redirect:/vehiculos";

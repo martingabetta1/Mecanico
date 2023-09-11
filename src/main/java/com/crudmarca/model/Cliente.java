@@ -28,10 +28,10 @@ public class Cliente {
     @NotNull
     @NotBlank
     @Size(max = 40)
-    @Column(name = "cliente_nombre", unique = true,nullable = false)
+    @Column(name = "cliente_nombre",nullable = false)
     private String cliente_nombre;
 
-    @Column(name = "cliente_apellido", unique = true,nullable = false)
+    @Column(name = "cliente_apellido",nullable = false)
     private String cliente_apellido;
 
     @Column(name = "cliente_telefono", unique = true,nullable = false)

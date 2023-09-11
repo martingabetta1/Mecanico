@@ -20,7 +20,7 @@ import jakarta.validation.constraints.Size;
 
 
 @Entity
-@Table(name="Tecnico", uniqueConstraints=@UniqueConstraint(columnNames={"tecnico_id", "tecnico_nombre"}))
+@Table(name="Tecnico", uniqueConstraints=@UniqueConstraint(columnNames={"tecnico_id","tecnico_nombre","tecnico_apellido","tecnico_telefono"}))
 @SQLDelete(sql = "UPDATE Tecnico SET eliminado = true WHERE tecnico_id = ?")
 @Where(clause = "eliminado = false")
 public class Tecnico {
@@ -29,7 +29,7 @@ public class Tecnico {
     private Integer tecnico_id;
     
     @Size(max = 40)
-    @Column(name = "tecnico_nombre", unique = true,nullable = false)
+    @Column(name = "tecnico_nombre",nullable = false)
     private String tecnico_nombre;
 
     @NotNull
