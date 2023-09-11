@@ -41,7 +41,7 @@ public class VehiculoController {
         List<Cliente> clientes = clienteRepository.findAll();
 
         model.addAttribute("Modelos", modelos);
-        model.addAttribute("clientes", clientes);
+        model.addAttribute("Clientes", clientes);
         model.addAttribute("Vehiculos", vehiculosActivos);
         return "vehiculo/home";
     }
@@ -49,7 +49,9 @@ public class VehiculoController {
     @GetMapping("/create") // http://localhost:8080/vehiculo/create
     public String create(Model model) {
         List<Modelo> modelos = modeloRepository.findAll();
+        List<Cliente> clientes = clienteRepository.findAll();
         model.addAttribute("Modelos", modelos);
+        model.addAttribute("Clientes", clientes);
         return "vehiculo/create";
     }
 

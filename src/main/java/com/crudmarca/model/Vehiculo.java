@@ -35,11 +35,11 @@ public class Vehiculo {
     private String vehiculo_patente;
 
     @ManyToOne
-    @JoinColumn(name="modelo_id")
+    @JoinColumn(name="vehiculo_modelo")
     private Modelo vehiculo_modelo;
 
     @ManyToOne
-    @JoinColumn(name="cliente_id")
+    @JoinColumn(name="vehiculo_cliente")
     private Cliente vehiculo_cliente;
     
     private boolean eliminado = Boolean.FALSE;
