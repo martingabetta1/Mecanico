@@ -16,7 +16,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 @Entity
-@Table(name="Vehiculo", uniqueConstraints =@UniqueConstraint(columnNames ={"vehiculo_id", "vehiculo_patente", "vehiculo_modelo", "vehiculo_cliente"} ) )
+@Table(name="Vehiculo", uniqueConstraints =@UniqueConstraint(columnNames ={"vehiculo_id", "vehiculo_patente", "modelo_id", "cliente_id"} ) )
 @SQLDelete(sql = "UPDATE Vehiculo SET eliminado = true WHERE vehiculo_id = ?")
 @Where(clause = "eliminado = false")
 public class Vehiculo {
@@ -31,15 +31,15 @@ public class Vehiculo {
         regexp = "^[A-Z]{3} \\d{3}$|^[A-Z]{2} \\d{3} [A-Z]{2}$",
         message = "El formato de la patente no es válido."
     )
-    @Column(name = "vehiculo_patente", nullable = false)
+    @Column(name = "vehiculo_patente", nullable = false, unique=true)
     private String vehiculo_patente;
 
     @ManyToOne
-    @JoinColumn(name="vehiculo_modelo")
+    @JoinColumn(name="modelo_id")
     private Modelo vehiculo_modelo;
 
     @ManyToOne
-    @JoinColumn(name="vehiculo_cliente")
+    @JoinColumn(name="cliente_id")
     private Cliente vehiculo_cliente;
     
     private boolean eliminado = Boolean.FALSE;
