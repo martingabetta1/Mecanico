@@ -28,8 +28,6 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer cliente_id;
     
-    @NotNull
-    @NotBlank
     @Size(max = 40)
     @Column(name = "cliente_nombre",nullable = false)
     private String cliente_nombre;

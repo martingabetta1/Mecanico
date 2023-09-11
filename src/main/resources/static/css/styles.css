@@ -222,6 +222,10 @@ input[type="text"]:hover {
     margin: 0 0 20px 0;
 }
 
+.input-group-text{
+    background-color: #cfc9c9;
+}
+
 .cancel-modal-header {
     background-color: var(--delete-color) !important;
     border-bottom: 1px solid #C0392B;

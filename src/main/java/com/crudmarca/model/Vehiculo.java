@@ -24,9 +24,6 @@ public class Vehiculo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer vehiculo_id;
 
-
-
-    @NotNull
     @Pattern(
         regexp = "^[A-Z]{3} \\d{3}$|^[A-Z]{2} \\d{3} [A-Z]{2}$",
         message = "El formato de la patente no es válido."
