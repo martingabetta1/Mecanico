@@ -1,6 +1,8 @@
 package com.crudmarca.controller;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +25,8 @@ public class ClienteController {
 
     @GetMapping("")
     public String home(Model model){
-        model.addAttribute("Clientes", clienteRepository.findAll());
+        List<Cliente> clientesActivos = clienteRepository.findByEliminadoFalse();
+        model.addAttribute("Clientes", clientesActivos);
         return "cliente/home";
     }
 

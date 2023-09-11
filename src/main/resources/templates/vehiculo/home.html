@@ -84,7 +84,7 @@
                                                             th:value="${modelo.modelo_id}"
                                                             th:selected="${modelo.modelo_id == vehiculo.vehiculo_modelo.modelo_id}"></option>
                                                 </select>
-                                                
+
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="basic-addon3">Cliente</span>
                                                 </div>
@@ -94,7 +94,7 @@
                                                             th:text="${cliente.cliente_nombre + ' ' + cliente.cliente_apellido}"
                                                             th:value="${cliente.cliente_id}"
                                                             th:selected="${cliente.cliente_id == vehiculo.vehiculo_cliente.cliente_id}"></option>
-                                                </select>                                                
+                                                </select>
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-edit modal-btn">Actualizar</button>
@@ -153,14 +153,14 @@
                                     <span class="input-group-text" id="basic-addon3">Patente del vehículo</span>
                                 </div>
                                 <input type="text" class="form-control" id="inputPatenteVehiculo"
-                                    name="vehiculo_patente" placeholder="Ingrese la patente del vehículo">
+                                    name="vehiculo_patente" placeholder="Ingrese la patente del vehículo" pattern="[A-Z]{2}\s\d{3}\s[A-Z]{2}|[A-Z]{3}\s\d{3}" required>
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon3">Modelo del vehículo</span>
                                 </div>
                                 <select class="form-select" aria-label="Select Modelo" id="selectModeloVehiculo"
-                                    name="modelo_id">
+                                    name="modelo_id" required>
                                     <option selected disabled>Seleccionar un modelo</option>
                                     <option th:each="modelo : ${Modelos}" th:text="${modelo.modelo_nombre}"
                                         th:value="${modelo.modelo_id}"></option>
@@ -180,11 +180,17 @@
                             <button type="submit" class="btn btn-create modal-btn">Guardar</button>
                         </div>
                     </form>
+                    <script>
+                        function vaidarFormatoPatente(input) {
+                            input.value = input.value.replace(/^[a-zA-Z]{3}\d{3}$/g, '');
+                        }
+                    </script>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-closeModal modal-btn" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
+
     </div>
 </div>

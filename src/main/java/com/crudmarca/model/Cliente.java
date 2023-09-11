@@ -3,7 +3,9 @@ package com.crudmarca.model;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.Where;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,7 +21,8 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name="Cliente", uniqueConstraints=@UniqueConstraint(columnNames={"cliente_id", "cliente_nombre", "cliente_apellido", "cliente_telefono"}))
-
+@SQLDelete(sql = "UPDATE Cliente SET eliminado = true WHERE cliente_id = ?")
+@Where(clause = "eliminado = false")
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,6 +48,7 @@ public class Cliente {
     @UpdateTimestamp
     private LocalDateTime fecha_modificacion;
 
+    private boolean eliminado =Boolean.FALSE;
 
     public Cliente(){
         super();
@@ -119,10 +123,14 @@ public class Cliente {
     }
 
 
-    
-    
+    public boolean isEliminado() {
+        return eliminado;
+    }
 
 
-    
+    public void setEliminado(boolean eliminado) {
+        this.eliminado = eliminado;
+    }
+
 
 }

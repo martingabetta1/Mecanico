@@ -50,7 +50,7 @@
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form th:action="@{/marcas/save}" method="post">
+                                    <form id="formMarca" th:action="@{/marcas/save}" method="post">
                                         <input type="hidden" name="marca_id" th:value="${marca.marca_id}">
                                         <div class="form-group">
                                             <div class="input-group mb-3">
@@ -59,10 +59,10 @@
                                                 </div>
                                                 <input type="text" class="form-control" id="inputNombreMarca"
                                                     name="marca_nombre" th:value="${marca.marca_nombre}"
-                                                    placeholder="Ingrese el nuevo nombre de la marca">
+                                                    placeholder="Ingrese el nuevo nombre de la marca" oninput="validarSoloLetras(this)" required>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-edit modal-btn">Actualizar</button>
+                                        <button type="submit" class="btn btn-edit modal-btn" >Actualizar</button>
                                     </form>
                                 </div>
                                 <div class="modal-footer">
@@ -71,6 +71,7 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                     <!-- Modal de ELIMINAR -->
                     <div class="modal fade" th:id="'deleteModal' + ${marca.marca_id}" tabindex="-1"
@@ -110,18 +111,18 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form th:action="@{/marcas/save}" method="post">
+                        <form id="formMarca" th:action="@{/marcas/save}" method="post">
                             <div class="form-group">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon3">Nombre de la marca</span>
                                     </div>
                                     <input type="text" class="form-control" id="inputNombreMarca" name="marca_nombre"
-                                        placeholder="Ingrese el nuevo nombre de la marca">
+                                        placeholder="Ingrese el nuevo nombre de la marca" oninput="validarSoloLetras(this)" required>
                                 </div>
                             </div>
                             <div>
-                                <button type="submit" class="btn btn-create modal-btn">Guardar</button>
+                                <button id="btnGuardar" type="submit" class="btn btn-create modal-btn">Guardar</button>
                             </div>
                         </form>
                     </div>
@@ -131,5 +132,14 @@
                     </div>
                 </div>
             </div>
+            <script>
+
+                function validarSoloLetras(input) {
+                    input.value = input.value.replace(/[^a-zA-ZÑñ]/g, '');
+                }
+
+
+            </script>
         </div>
+
     </div>
